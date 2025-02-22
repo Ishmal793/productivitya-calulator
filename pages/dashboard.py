@@ -8,10 +8,8 @@ st.set_page_config(page_title="Productivity Calculator", page_icon="📊", layou
 # Sidebar Logo & Company Name
 if "company_logo" in st.session_state and st.session_state["company_logo"]:
     st.sidebar.image(st.session_state["company_logo"], use_column_width=True)
-
-if "company_name" in st.session_state and st.session_state["company_name"]:
-    st.sidebar.markdown(f"### {st.session_state['company_name']}")
-
+company_name = st.session_state.company_name if "company_name" in st.session_state else "Your Company"
+st.title(f"{company_name} - Productivity Dashboard")
 
 
 st.title("📊 Productivity Calculator")
