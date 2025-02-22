@@ -6,8 +6,8 @@ import os
 st.set_page_config(page_title="Productivity Calculator", page_icon="📊", layout="wide")
 st.markdown("""
     <style>
-        /* Hide sidebar title "main" */
-        .st-emotion-cache-1q2d4ya.e1c29vlm6 { 
+        /* Hide the first sidebar menu item ("main") */
+        .st-emotion-cache-1q2d4ya.e1c29vlm6:first-child {
             display: none !important;
         }
     </style>
