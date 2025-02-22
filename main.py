@@ -1,7 +1,7 @@
 import streamlit as st
 
 st.set_page_config(page_title="Company Details", page_icon="🏢", layout="wide")
-removing 3 bar and on streamlit
+# removing 3 bar and on streamlit
 st.markdown("""
 <style>
 .st-emotion-cache-yfhhig.ef3psqc5,.st-emotion-cache-1wbqy5l.e17vllj40
