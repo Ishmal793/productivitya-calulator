@@ -3,16 +3,20 @@ import pandas as pd
 import os
 
 
-st.set_page_config(page_title="Productivity Records", page_icon="📂", layout="wide")
+st.set_page_config(page_title="Productivity Calculator", page_icon="📊", layout="wide")
 
-# Sidebar - Show Company Logo & Name from Session State
-st.sidebar.header("Company Details")
+# Sidebar Logo & Company Name
+if "company_logo" in st.session_state and st.session_state["company_logo"]:
+    st.sidebar.image(st.session_state["company_logo"], use_column_width=True)
 
-if "company_logo" in st.session_state and st.session_state.company_logo:
-    st.sidebar.image(st.session_state.company_logo, use_column_width=True)
+if "company_name" in st.session_state and st.session_state["company_name"]:
+    st.sidebar.markdown(f"### {st.session_state['company_name']}")
 
-company_name = st.session_state.company_name if "company_name" in st.session_state else "Your Company"
-st.title(f"{company_name} - Productivity Dashboard")
+# Sidebar Navigation (NO MAIN PAGE)
+page = st.sidebar.radio("Go to", ["Productivity Calculator", "Records View"])
+
+if page == "Records View":
+    st.switch_page("pages/records.py")
 
 st.title("📊 Productivity Calculator")
 
