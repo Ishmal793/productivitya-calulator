@@ -12,58 +12,62 @@ if "company_logo" in st.session_state and st.session_state.company_logo:
 
 company_name = st.session_state.company_name if "company_name" in st.session_state else "Your Company"
 st.title(f"{company_name} - Productivity Dashboard")
+st.title("📊 Productivity Calculator")
 
-
-# Define Excel file name
-data_file = "productivity_data.xlsx"
-
-# Check if file exists; if not, create an empty DataFrame
+# Check if Excel file exists, if not create it
+data_file = "data.xlsx"
 if not os.path.exists(data_file):
     df = pd.DataFrame(columns=["Type", "Name", "Department", "Input", "Output", "Productivity"])
     df.to_excel(data_file, index=False)
 
-# Load existing data
+# Sidebar options
+option = st.sidebar.radio("Select Calculation", ["Overall Productivity", "Department Productivity", "Employee Productivity"])
+
+# Load data
 df = pd.read_excel(data_file)
 
-# Sidebar - Selection
-st.sidebar.header("Productivity Calculator")
-option = st.sidebar.radio("Select Productivity Type", ["Overall Productivity", "Department Productivity", "Employee Productivity"])
+if option == "Overall Productivity":
+    st.subheader("📈 Calculate Overall Productivity")
+    total_input = st.number_input("Enter Total Input", min_value=1)
+    total_output = st.number_input("Enter Total Output", min_value=1)
+    if st.button("Calculate"):
+        productivity = total_output / total_input
+        st.success(f"✅ Productivity: {productivity:.2f}")
 
-# User Input Fields
-with st.sidebar.form("Productivity Form"):
-    if option == "Overall Productivity":
-        total_input = st.number_input("Enter Total Input", min_value=1.0)
-        total_output = st.number_input("Enter Total Output", min_value=0.0)
-        name, department = "-", "-"  # Not needed for overall
+        # Save Data
+        new_data = pd.DataFrame([["Overall", "-", "-", total_input, total_output, productivity]], 
+                                columns=df.columns)
+        df = pd.concat([df, new_data], ignore_index=True)
+        df.to_excel(data_file, index=False)
 
-    elif option == "Department Productivity":
-        department = st.text_input("Enter Department Name")
-        total_input = st.number_input("Enter Department Input", min_value=1.0)
-        total_output = st.number_input("Enter Department Output", min_value=0.0)
-        name = "-"  # Not needed for department-level productivity
+elif option == "Department Productivity":
+    st.subheader("🏢 Department Productivity")
+    department = st.text_input("Enter Department Name")
+    dept_input = st.number_input("Enter Department Input", min_value=1)
+    dept_output = st.number_input("Enter Department Output", min_value=1)
+    if st.button("Calculate"):
+        productivity = dept_output / dept_input
+        st.success(f"✅ {department} Productivity: {productivity:.2f}")
 
-    else:  # Employee Productivity
-        name = st.text_input("Enter Employee Name")
-        department = st.text_input("Enter Department Name")
-        total_input = st.number_input("Enter Employee Input", min_value=1.0)
-        total_output = st.number_input("Enter Employee Output", min_value=0.0)
+        # Save Data
+        new_data = pd.DataFrame([["Department", "-", department, dept_input, dept_output, productivity]], 
+                                columns=df.columns)
+        df = pd.concat([df, new_data], ignore_index=True)
+        df.to_excel(data_file, index=False)
 
-    # Submit Button
-    add_data = st.form_submit_button(label="Calculate & Save")
+elif option == "Employee Productivity":
+    st.subheader("👨‍💼 Employee Productivity")
+    employee = st.text_input("Enter Employee Name")
+    department = st.text_input("Enter Department Name")
+    emp_input = st.number_input("Enter Employee Input", min_value=1)
+    emp_output = st.number_input("Enter Employee Output", min_value=1)
+    if st.button("Calculate"):
+        productivity = emp_output / emp_input
+        st.success(f"✅ {employee} Productivity: {productivity:.2f}")
 
-if add_data:
-    productivity = round(total_output / total_input, 2)  # Formula
-    new_data = pd.DataFrame([[option, name, department, total_input, total_output, productivity]],
-                            columns=df.columns)
-    
-    df = pd.concat([df, new_data], ignore_index=True)  # Append new record
-    df.to_excel(data_file, index=False)  # Save to Excel
+        # Save Data
+        new_data = pd.DataFrame([["Employee", employee, department, emp_input, emp_output, productivity]], 
+                                columns=df.columns)
+        df = pd.concat([df, new_data], ignore_index=True)
+        df.to_excel(data_file, index=False)
 
-    st.success(f"Productivity Recorded: {productivity}")
-
-# Show Data Table
-st.subheader("Productivity Data")
-st.dataframe(df, use_container_width=True)
-
-# Download Button
-st.download_button("Download Data as Excel", df.to_csv(index=False), "productivity_data.csv", "text/csv")
