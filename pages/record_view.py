@@ -3,19 +3,6 @@ import pandas as pd
 import os
 
 st.set_page_config(page_title="Productivity Records", page_icon="📂", layout="wide")
-# Sidebar Logo & Company Name
-if "company_logo" in st.session_state and st.session_state["company_logo"]:
-    st.sidebar.image(st.session_state["company_logo"], use_column_width=True)
-
-if "company_name" in st.session_state and st.session_state["company_name"]:
-    st.sidebar.markdown(f"### {st.session_state['company_name']}")
-
-# Sidebar Navigation (NO MAIN PAGE)
-page = st.sidebar.radio("Go to", ["Productivity Calculator", "Records View"])
-
-if page == "Records View":
-    st.switch_page("pages/records.py")
-
 
 st.title("📂 Productivity Data Records")
 
