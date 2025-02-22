@@ -4,13 +4,13 @@ import os
 
 
 st.set_page_config(page_title="Productivity Calculator", page_icon="📊", layout="wide")
-# st.markdown("""
-# <style>
-# .st-emotion-cache-j7qwjs.e1c29vlm3
-# { visibility:hidden;
-# }
-# </style>
-# """,unsafe_allow_html=True)
+st.markdown("""
+<style>
+.st-emotion-cache-1la27qv.e1c29vlm5
+{ visibility:hidden;
+}
+</style>
+""",unsafe_allow_html=True)
 
 # Sidebar Logo & Company Name
 if "company_logo" in st.session_state and st.session_state["company_logo"]:
