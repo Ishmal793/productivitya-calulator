@@ -4,7 +4,7 @@ st.set_page_config(page_title="Company Details", page_icon="🏢", layout="wide"
 # removing 3 bar and on streamlit
 st.markdown("""
 <style>
-.stAppHeader.st-emotion-cache-h4xjwg.e4hpqof0,.st-emotion-cache-6qob1r.e1c29vlm8,.stSidebar.st-emotion-cache-rpj0dg.e1c29vlm0
+.stAppHeader.st-emotion-cache-h4xjwg.e4hpqof0,.st-emotion-cache-6qob1r.e1c29vlm8,.stSidebar.st-emotion-cache-rpj0dg.e1c29vlm0,s.t-emotion-cache-1y9tyez.e1c29vlm15
 { visibility:hidden;
 }
 </style>
