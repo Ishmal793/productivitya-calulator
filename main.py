@@ -18,7 +18,7 @@ if "company_name" not in st.session_state:
 
 # Redirect if details exist
 if st.session_state["company_name"]:
-    st.switch_page("pages/dashboard.py")
+    st.switch_page("pages/calculator.py")  # Redirect directly to productivity calculator
 
 st.title("🏢 Enter Company Details")
 
@@ -38,9 +38,6 @@ with st.form("company_form"):
             st.session_state["company_logo"] = bytes_data  # Store in session state
 
         st.success("✅ Details saved! Redirecting to dashboard...")
-        st.switch_page("pages/dashboard.py")
+        st.switch_page("pages/calculator.py")  # Redirect to calculator page
 
-# Display logo in sidebar
-if "company_logo" in st.session_state and st.session_state["company_logo"]:
-    st.sidebar.image(st.session_state["company_logo"], use_column_width=True)
 
