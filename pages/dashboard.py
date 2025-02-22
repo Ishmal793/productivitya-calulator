@@ -5,13 +5,13 @@ import os
 
 st.set_page_config(page_title="Productivity Calculator", page_icon="📊", layout="wide")
 st.markdown("""
-<style>
-.st-emotion-cache-j7qwjs.e1c29vlm3.st-emotion-cache-1la27qv.e1c29vlm5
-{ visibility:hidden;
-}
-</style>
-""",unsafe_allow_html=True)
-
+    <style>
+        /* Hide sidebar title "main" */
+        .st-emotion-cache-1q2d4ya.e1c29vlm6 { 
+            display: none !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
 # Sidebar Logo & Company Name
 if "company_logo" in st.session_state and st.session_state["company_logo"]:
     st.sidebar.image(st.session_state["company_logo"], use_column_width=True)
