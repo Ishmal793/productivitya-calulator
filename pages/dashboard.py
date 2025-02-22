@@ -6,7 +6,7 @@ import os
 st.set_page_config(page_title="Productivity Calculator", page_icon="📊", layout="wide")
 st.markdown("""
 <style>
-.st-emotion-cache-j7qwjs.e1c29vlm3
+.st-emotion-cache-j7qwjs.e1c29vlm3,.st-emotion-cache-1la27qv.e1c29vlm5
 { visibility:hidden;
 }
 </style>
