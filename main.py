@@ -38,6 +38,6 @@ with st.form("company_form"):
             st.session_state["company_logo"] = bytes_data  # Store in session state
 
         st.success("✅ Details saved! Redirecting to dashboard...")
-        st.switch_page("pages/calculator.py")  # Redirect to calculator page
+        st.switch_page("pages/dashboard.py")  # Redirect to calculator page
 
 
