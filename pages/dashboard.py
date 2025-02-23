@@ -4,6 +4,7 @@ import os
 
 
 st.set_page_config(page_title="Productivity Calculator", page_icon="📊", layout="wide")
+# CSS to hide ONLY "main" without affecting other sidebar elements
 st.markdown("""
     <style>
         /* Hide only the sidebar link with text "main" */
