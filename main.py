@@ -10,34 +10,36 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Session state for company details
+# Initialize session state variables if not already set
 if "company_name" not in st.session_state:
     st.session_state["company_name"] = None
     st.session_state["email"] = None
     st.session_state["company_logo"] = None
 
-# Redirect if details exist
-if st.session_state["company_name"]:
-    st.switch_page("pages/calculator.py")  # Redirect directly to productivity calculator
+# Check if details already exist
+is_edit_mode = st.session_state["company_name"] is not None
 
-st.title("🏢 Enter Company Details")
+st.title("🏢 Enter Company Details" if not is_edit_mode else "✏️ Edit Company Details")
 
 with st.form("company_form"):
-    company_name = st.text_input("Company Name")
-    email = st.text_input("Email Address")
+    company_name = st.text_input("Company Name", value=st.session_state["company_name"] or "")
+    email = st.text_input("Email Address", value=st.session_state["email"] or "")
     logo = st.file_uploader("Upload Company Logo", type=["png", "jpg", "jpeg"])
+
     submit = st.form_submit_button("Submit")
 
-    if submit and company_name:
-        st.session_state["company_name"] = company_name
-        st.session_state["email"] = email
+    if submit:
+        if not company_name or not email or (not logo and not is_edit_mode):
+            st.error("❌ Please fill all fields (including logo for first time)!")
+        else:
+            st.session_state["company_name"] = company_name
+            st.session_state["email"] = email
 
-        # Convert logo to BytesIO and save in session state
-        if logo is not None:
-            bytes_data = io.BytesIO(logo.getvalue())  # Convert uploaded file to BytesIO
-            st.session_state["company_logo"] = bytes_data  # Store in session state
+            # Store logo if uploaded, otherwise keep old logo
+            if logo is not None:
+                bytes_data = io.BytesIO(logo.getvalue())  # Convert uploaded file to BytesIO
+                st.session_state["company_logo"] = bytes_data  # Store in session state
 
-        st.success("✅ Details saved! Redirecting to dashboard...")
-        st.switch_page("pages/dashboard.py")  # Redirect to calculator page
-
+            st.success("✅ Details saved! Redirecting to dashboard...")
+            st.switch_page("pages/dashboard.py")  # Redirect to dashboard
 
