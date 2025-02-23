@@ -15,7 +15,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 # Sidebar Logo & Company Name
 if "company_logo" in st.session_state and st.session_state["company_logo"]:
-    st.sidebar.image(st.session_state["company_logo"], use_column_width=True)
+    st.sidebar.image(st.session_state["company_logo"], use_container_width=True)
 company_name = st.session_state.company_name if "company_name" in st.session_state else "Your Company"
 st.title(f"{company_name} - Productivity Dashboard")
 
