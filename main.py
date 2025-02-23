@@ -2,15 +2,7 @@ import streamlit as st
 import io
 
 st.set_page_config(page_title="Company Details", page_icon="🏢", layout="wide")
-# CSS to hide ONLY "main" without affecting other sidebar elements
-st.markdown("""
-    <style>
-        /* Hide only the sidebar link with text "main" */
-        [data-testid="stSidebarNavLink"] span:contains("main") {
-            display: none !important;
-        }
-    </style>
-""", unsafe_allow_html=True)
+
 # Hide default Streamlit elements
 st.markdown("""
 <style>
