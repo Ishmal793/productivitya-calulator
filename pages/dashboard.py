@@ -4,14 +4,14 @@ import os
 
 
 st.set_page_config(page_title="Productivity Calculator", page_icon="📊", layout="wide")
-st.markdown("""
-    <style>
-        /* Hide the first sidebar menu item ("main") */
-        .st-emotion-cache-1q2d4ya.e1c29vlm6:first-child {
-            display: none !important;
-        }
-    </style>
-""", unsafe_allow_html=True)
+# st.markdown("""
+#     <style>
+#         /* Hide the first sidebar menu item ("main") */
+#         .st-emotion-cache-1q2d4ya.e1c29vlm6:first-child {
+#             display: none !important;
+#         }
+#     </style>
+# """, unsafe_allow_html=True)
 # Sidebar Logo & Company Name
 if "company_logo" in st.session_state and st.session_state["company_logo"]:
     st.sidebar.image(st.session_state["company_logo"], use_column_width=True)
